@@ -1,11 +1,9 @@
 <template>
   <div class="volume-control">
-    <!-- 播放/暂停按钮 -->
     <button class="play-btn" @click="togglePlay" :disabled="!audioReady">
       {{ isPlaying ? 'Pause' : 'Play' }}
     </button>
 
-    <!-- 原有音量控制按钮 -->
     <button class="volume-btn" @mouseover="startAdjust(-1)" @mouseleave="stopAdjust">-</button>
     <div class="volume-bar">
       <div class="volume-fill" :style="{ width: volume + '%' }"></div>
@@ -20,28 +18,23 @@ import { ref, onUnmounted, watch } from 'vue'
 
 export default {
   setup() {
-    // 音量控制
     const volume = ref<number>(50)
     let intervalId: number | null = null
     let currentDirection: number = 1
 
-    // 音频相关
-    const audio = new Audio('public/audio/audio.mp3') // 替换为实际音频路径
+    const audio = new Audio('public/audio/audio.mp3') // change the audio path here
     audio.loop = true
     const isPlaying = ref<boolean>(false)
     const audioReady = ref<boolean>(false)
 
-    // 监听音频加载完成
     audio.addEventListener('canplaythrough', () => {
       audioReady.value = true
     })
 
-    // 音量同步
     watch(volume, (newVal) => {
       audio.volume = newVal / 100
     })
 
-    // 播放/暂停切换
     const togglePlay = () => {
       if (isPlaying.value) {
         audio.pause()
@@ -51,11 +44,11 @@ export default {
       isPlaying.value = !isPlaying.value
     }
 
-    // 音量调整逻辑（原逻辑保持不变）
+
     const startAdjust = (direction: number) => {
       stopAdjust()
       currentDirection = direction
-      let interval = 150 // 初始间隔
+      let interval = 150
 
       const adjust = () => {
         volume.value = Math.min(
@@ -76,7 +69,6 @@ export default {
       }
     }
 
-    // 组件卸载时清理
     onUnmounted(() => {
       audio.pause()
       audio.src = ''
@@ -140,7 +132,6 @@ export default {
   background-color: #ccc;
 }
 
-/* 在<style scoped>中添加 */
 .play-btn {
   margin-right: 10px;
   padding: 8px 16px;
