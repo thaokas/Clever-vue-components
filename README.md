@@ -1,4 +1,4 @@
-# Amazing-vue-components
+# Clever-vue-components
 
 This a  self-enjoy project, which is a collection of some stupid vue components. It not focus on the technical, but focus on the design and joy.
 
@@ -6,8 +6,4 @@ This a  self-enjoy project, which is a collection of some stupid vue components.
 
 ## List of components
 
-### Volume control UI
-
-+ Component name: VolumeControl.vue
-+ Component path: `src/components/VolumeControl.vue`
-+ Description: A volume control UI.
++ [Volume Control](/src/components/VolumeControl.vue) : A volume control component. When the mouse hovers over the "-/+" sign, the volume changes "-/+". The longer the hover event, the faster the volume changes
